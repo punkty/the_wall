@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Wall</title>
+</head>
+<body>
+    <h1>The Wall</h1>
+    {% for message in messages %}
+        <h3>message poster's firstname/lastname/time of message</h3>
+        <p>message content</p>
+        {% for comment in comments %}
+            <h4>comment poster's firstname/lastname/time of comment</h4>
+            <p>comment content</p>
+        {% end for %}
+    {% endfor %}
+</body>
+</html>

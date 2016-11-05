@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WHAT'S IN$IDE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <h2>Registration</h2>
+    <form action="/register" method="POST">
+        <p>First Name: <input type="text" name="first_name"></p>
+        <p>Last Name: <input type="text" name="last_name"></p>
+        <p>Email: <input type="text" name="email"></p>
+        <p>Password: <input type="password" name="password"></p>
+        <p>Confirm Password: <input type="password" name="confirm"></p>
+        <p><input type="submit" value="Register"></p>
+    </form>
+    <h1>Login</h1>
+    <form action="/login" method="POST">
+        <p>Email: <input type="text" name="email"></p>
+        <p>Password: <input type="password" name="password"></p>
+        <p><input type="submit" value="Login"></p>
+    </form>
+</body>
+</html>
