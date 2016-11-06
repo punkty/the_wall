@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Wall</title>
+    <title>WHAT'S IN$IDE</title>
 </head>
 <body>
     <h1>The Wall</h1>
@@ -12,21 +12,21 @@
         <input type="text" name="new_message">
         <input type="submit" value="Post a Message">    
     </form>
+
     {{ commentdata }}
-    {{ messagedata }}
-        {% for message in messages %}
-        <h3>message poster's firstname/lastname/time of message</h3>
-        <p>message content</p>
-        {% for comment in comments %}
-            {% if comments.messages_id == messages.id%}
-            <h4></h4>
-            <p>comment content</p>   
-            {% endif %}
+        {% for message in messagedata %}
+            <h3>{{ message['first_name'], message['last_name'], message['created_at'] }}</h3>
+            <p>{{ message['message'] }}</p>
+            {% for comment in commentdata %}
+                {% if comment['messages_id'] == message['id'] %}
+                    <h4>{{ comment['first_name'], comment['last_name'], comment['created_at'] }}</h4>
+                    <p>{{ comment['comment'] }}</p>
+                {% endif %}
         {% endfor %}
-    <form action="/comment" method="POST">
+    <form action="/comment/{{ message['id'] }}" method="POST">
         <input type="text" name="new_comment">
         <input type="submit" value="Post a Comment">
-    </form> 
+    </form>
     {% endfor %}
 </body>
 </html>

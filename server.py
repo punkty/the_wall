@@ -88,11 +88,11 @@ def login():
 def wall():
     # refresh wall content
     #query for messages
-    messagequery = "SELECT * FROM messages LEFT JOIN users ON users.id = messages.users_id"
+    messagequery = "SELECT messages.id, messages.message, messages.created_at, users.first_name, users.last_name FROM messages LEFT JOIN users ON users.id = messages.users_id"
     messagedata = mysql.query_db(messagequery)
 
     #query for comments
-    commentquery = "SELECT * FROM comments LEFT JOIN messages ON comments.messages_id = messages.id"
+    commentquery = "SELECT * FROM comments LEFT JOIN messages ON comments.messages_id = messages.id LEFT JOIN users  ON comments.users_id = users.id"
     commentdata = mysql.query_db(commentquery)
 
 
@@ -111,9 +111,15 @@ def message():
 
     return redirect('/wall')
 
-@app.route('/comment',methods=["POST"])
-def comment():
-    # adds comment info to db w/query
+@app.route('/comment/<message_id>',methods=["POST"])
+def comment(message_id):
+    query = 'INSERT INTO comments (comment, messages_id, users_id) VALUES (:comment, :messages_id, :users_id);'
+    data = {
+            'comment': request.form['new_comment'],
+            'messages_id': message_id,
+            'users_id': session['user_id']
+    }
+    mysql.query_db(query,data)
     return redirect('/wall')
 
 @app.route('/delete')
