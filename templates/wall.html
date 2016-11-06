@@ -6,13 +6,24 @@
 </head>
 <body>
     <h1>The Wall</h1>
+    <a href="/logoff"><button>Log Off</button></a>
+    <h3>Post Message</h3>
+    <form action="/message" method="POST">
+        <input type="text" name="new_message">
+        <input type="submit" value="Post a Message">    
+    </form>
+    
     {% for message in messages %}
         <h3>message poster's firstname/lastname/time of message</h3>
         <p>message content</p>
         {% for comment in comments %}
             <h4>comment poster's firstname/lastname/time of comment</h4>
-            <p>comment content</p>
-        {% end for %}
+            <p>comment content</p>   
+        {% endfor %}
+    <form action="/comment" method="POST">
+        <input type="text" name="new_comment">
+        <input type="submit" value="Post a Comment">
+    </form> 
     {% endfor %}
 </body>
 </html>
