@@ -14,6 +14,7 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 @app.route('/')
 def index():
     # login / register page
+    print "BUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCK"
     return render_template('index.html')
 
 @app.route('/register', methods=["POST"])
@@ -88,15 +89,25 @@ def login():
 def wall():
     # refresh wall content
     #query for messages
-    messagequery = "SELECT messages.id, messages.message, messages.created_at, users.first_name, users.last_name FROM messages LEFT JOIN users ON users.id = messages.users_id"
+    if "user_id" not in session and request.endpoint != "/": #ask Jack about this
+        return redirect('/')
+
+    userquery = "SELECT first_name FROM users WHERE id = :id;"
+
+    data = {"id":session["user_id"]}
+
+    user_first = mysql.query_db(userquery,data)[0]
+
+
+    messagequery = "SELECT messages.id, messages.users_id, messages.message, messages.created_at, users.first_name, users.last_name FROM messages LEFT JOIN users ON users.id = messages.users_id ORDER BY messages.created_at DESC"
     messagedata = mysql.query_db(messagequery)
 
     #query for comments
-    commentquery = "SELECT * FROM comments LEFT JOIN messages ON comments.messages_id = messages.id LEFT JOIN users  ON comments.users_id = users.id"
+    commentquery = "SELECT * FROM comments LEFT JOIN messages ON comments.messages_id = messages.id LEFT JOIN users  ON comments.users_id = users.id ORDER BY comments.created_at DESC"
     commentdata = mysql.query_db(commentquery)
 
 
-    return render_template('wall.html', messagedata = messagedata, commentdata= commentdata)
+    return render_template('wall.html', messagedata = messagedata, commentdata= commentdata, user_first=user_first)
 
 
 @app.route('/message',methods=["POST"])
@@ -122,9 +133,14 @@ def comment(message_id):
     mysql.query_db(query,data)
     return redirect('/wall')
 
-@app.route('/delete')
-def delete():
+@app.route('/delete/<id>')
+def delete(id):
     # delete message
+    # if messagedata[0][''] 
+    query = "DELETE FROM comments WHERE comments.messages_id = :id; DELETE FROM messages WHERE messages.id = :id;"
+    data = {"id":id}
+
+    mysql.query_db(query,data)
     return redirect('/wall')
 
 @app.route('/logoff')

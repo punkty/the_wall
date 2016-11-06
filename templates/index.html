@@ -6,27 +6,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
-    <h2>Registration</h2>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-          <p>{{message}}</p>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-    <form action="/register" method="POST">
-        <p>First Name: <input type="text" name="first_name"></p>
-        <p>Last Name: <input type="text" name="last_name"></p>
-        <p>Email: <input type="text" name="email"></p>
-        <p>Password: <input type="password" name="password"></p>
-        <p>Confirm Password: <input type="password" name="confirm"></p>
-        <p><input type="submit" value="Register"></p>
-    </form>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-        <p>Email: <input type="text" name="email"></p>
-        <p>Password: <input type="password" name="password"></p>
-        <p><input type="submit" value="Login"></p>
-    </form>
+  <div id="main">
+      <h3>Registration</h3>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{message}}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <form action="/register" method="POST">
+          <p>First Name: <input type="text" name="first_name"></p>
+          <p>Last Name: <input type="text" name="last_name"></p>
+          <p>Email: <input type="text" name="email"></p>
+          <p>Password: <input type="password" name="password"></p>
+          <p>Confirm Password: <input type="password" name="confirm"></p>
+          <p><input type="submit" value="Register"></p>
+      </form>
+      <h3>Login</h3>
+      <form action="/login" method="POST">
+          <p>Email: <input type="text" name="email"></p>
+          <p>Password: <input type="password" name="password"></p>
+          <p><input type="submit" value="Login"></p>
+      </form>
+    </div><!-- /#main  -->
 </body>
 </html>

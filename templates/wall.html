@@ -6,20 +6,22 @@
 </head>
 <body>
     <h1>The Wall</h1>
+    <h2>Hello, {{ user_first["first_name"] }}</h2>
     <a href="/logoff"><button>Log Off</button></a>
     <h3>Post Message</h3>
     <form action="/message" method="POST">
         <input type="text" name="new_message">
         <input type="submit" value="Post a Message">    
     </form>
-
-    {{ commentdata }}
         {% for message in messagedata %}
-            <h3>{{ message['first_name'], message['last_name'], message['created_at'] }}</h3>
+            <h3>{{ message['first_name']}} {{ message['last_name'] }} {{ message['created_at'] }}</h3>
             <p>{{ message['message'] }}</p>
+            {% if message['users_id'] == session['user_id'] %}
+            <a href="/delete/{{message['id']}}"><button>Delete Message</button></a>
+            {% endif %}
             {% for comment in commentdata %}
                 {% if comment['messages_id'] == message['id'] %}
-                    <h4>{{ comment['first_name'], comment['last_name'], comment['created_at'] }}</h4>
+                    <h4>{{ comment['first_name'] }} {{ comment['last_name'] }} {{ comment['created_at'] }}</h4>
                     <p>{{ comment['comment'] }}</p>
                 {% endif %}
         {% endfor %}
