@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, session, flash
 import re
+import datetime
+from datetime import timedelta
+import math
 from mysqlconnection import MySQLConnector
 from flask_bcrypt import Bcrypt
 
@@ -14,7 +17,7 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 @app.route('/')
 def index():
     # login / register page
-    print "BUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCK"
+    print ("BUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCK")
     return render_template('index.html')
 
 @app.route('/register', methods=["POST"])
@@ -135,13 +138,22 @@ def comment(message_id):
 
 @app.route('/delete/<id>')
 def delete(id):
-    # delete message
-    # if messagedata[0][''] 
+
+    query = "SELECT created_at FROM messages WHERE id = :id"
+
+    data = {'id':id}    
+    #DATETIMEISSOMEHORSESHIT
+    # if (datetime.datetime.time(time_stamp) timedelta(minutes = 30) > datetime.datetime.now().time()):
     query = "DELETE FROM comments WHERE comments.messages_id = :id; DELETE FROM messages WHERE messages.id = :id;"
     data = {"id":id}
-
     mysql.query_db(query,data)
     return redirect('/wall')
+    # else:
+    #     flash("30 minutes has passed, bitch")
+    #     return redirect ('/wall')
+       
+
+    # delete message
 
 @app.route('/logoff')
 def logoff():
