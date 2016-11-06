@@ -59,7 +59,7 @@ def register(): #check for redundancy
         }
         session["user_id"] = mysql.query_db(query,data)
 
-        return redirect("/success")
+        return redirect("/wall")
 
 @app.route('/login',methods=["POST"])
 def login():
@@ -87,11 +87,28 @@ def login():
 @app.route('/wall')
 def wall():
     # refresh wall content
-    return render_template('wall.html')
+    #query for messages
+    messagequery = "SELECT * FROM messages LEFT JOIN users ON users.id = messages.users_id"
+    messagedata = mysql.query_db(messagequery)
+
+    #query for comments
+    commentquery = "SELECT * FROM comments LEFT JOIN messages ON comments.messages_id = messages.id"
+    commentdata = mysql.query_db(commentquery)
+
+
+    return render_template('wall.html', messagedata = messagedata, commentdata= commentdata)
+
 
 @app.route('/message',methods=["POST"])
 def message():
     # adds message info to db w/query
+    query = "INSERT INTO messages(users_id, created_at, message)VALUES(:users_id, NOW(), :message)"
+    data = {
+        "users_id" : session['user_id'],
+        'message' : request.form['new_message']
+    }
+    mysql.query_db(query,data)
+
     return redirect('/wall')
 
 @app.route('/comment',methods=["POST"])
