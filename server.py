@@ -105,7 +105,7 @@ def wall():
     messagedata = mysql.query_db(messagequery)
 
     #query for comments
-    commentquery = "SELECT * FROM comments LEFT JOIN messages ON comments.messages_id = messages.id LEFT JOIN users  ON comments.users_id = users.id ORDER BY comments.created_at DESC"
+    commentquery = "SELECT comments.id, comments.comment, comments.created_at, comments.messages_id, comments.users_id, users.first_name, users.last_name FROM comments LEFT JOIN messages ON comments.messages_id = messages.id LEFT JOIN users  ON comments.users_id = users.id ORDER BY comments.created_at DESC"
     commentdata = mysql.query_db(commentquery)
 
 
@@ -126,7 +126,7 @@ def message():
 
 @app.route('/comment/<message_id>',methods=["POST"])
 def comment(message_id):
-    query = 'INSERT INTO comments (comment, messages_id, users_id) VALUES (:comment, :messages_id, :users_id);'
+    query = 'INSERT INTO comments (comment, messages_id, users_id, created_at) VALUES (:comment, :messages_id, :users_id, NOW());'
     data = {
             'comment': request.form['new_comment'],
             'messages_id': message_id,

@@ -15,6 +15,10 @@
     margin-top: 10px;
 }
 
+#login_container h3:first-of-type {
+    margin-top: 10px;
+}
+
 h3 {
      text-align: center;
      color: #183173;

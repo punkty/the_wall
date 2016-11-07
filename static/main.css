@@ -16,7 +16,7 @@ body {
 
 #main {
     width: 400px;
-    height: 525px;
+    height: auto;
     margin: 0px auto;
     margin-top: 40px;
     padding: 30px;

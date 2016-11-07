@@ -10,13 +10,6 @@
   <div id="main">
       <img id="app_logo" src="{{ url_for('static', filename='wi_logo.svg') }}" alt="app_logo">
       <img id="login_logo" src="{{ url_for('static', filename = 'wi_login_banner.svg') }}" alt="login_banner">
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          {% for message in messages %}
-            <p>{{message}}</p>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
       <div id="login_container">
         <h3>Login</h3>
         <form action="/login" method="POST">
@@ -25,6 +18,13 @@
             <p><input type="submit" value="Login"></p>
         </form>
       </div><!-- /#login_container  -->
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{message}}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
       <div id="reg_container">
         <h3>Registration</h3>
         <form action="/register" method="POST">
