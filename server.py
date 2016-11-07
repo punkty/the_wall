@@ -36,8 +36,8 @@ def register(): #check for redundancy
 
     if not request.form['email']:
         errors.append("Please enter an email")
-    # elif re.match(EMAIL_REGEX,request.form['email']):  #regex broken
-    #     errors.append("Not a valid email")
+    elif not re.match(EMAIL_REGEX,request.form['email']):
+        errors.append("Not a valid email")
     elif user:
         errors.append("Email is already in use")
 
