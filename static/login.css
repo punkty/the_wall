@@ -1,0 +1,93 @@
+#login_logo  {
+    width: 100%;
+}
+
+#login_container {
+    width: 100%;
+
+}
+
+#login_container p {
+     margin-right: 120px;
+     text-align: right;
+}
+#login_container p:first-of-type {
+    margin-top: 10px;
+}
+
+h3 {
+     text-align: center;
+     color: #183173;
+}
+
+
+#reg_container {
+    width: 100%;
+    margin-top: 20px;
+    border-bottom: solid #183173 1px;
+    padding-bottom: 30px; 
+
+}
+
+#reg_container p:first-of-type {
+    margin-top: 10px;
+}
+
+p {
+     margin-right: 120px;
+     text-align: right;
+     color: #7bacff;
+}
+#reg_container p:first-of-type {
+    margin-top: 20px;
+
+}
+
+
+#app_logo {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin: 0px auto;
+}
+
+#tiny_logo {
+    width: 5%;
+    display: block;
+    margin: 0px auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+h5 {
+    font-size: 8pt;
+    text-align: center;
+    color: #5a525a;
+}
+
+
+input[type=submit] {
+    /* Non-hover attributes */
+    padding: 5px;
+    border-radius: 2px;
+    background-color: #f9f9f9; /* Background */
+    border: none;
+    color: white;
+    padding: 3px 6px 3px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: bold;
+    margin: 10px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: #183173; /* Font color */
+    border: 2px solid #183173; /* Border */
+}
+input[type=submit]:hover {
+    /* Hover Attributes */
+    background-color: #183173;
+    color: white;
+}
