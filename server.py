@@ -17,7 +17,6 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 @app.route('/')
 def index():
     # login / register page
-    print ("BUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCKBUTTFUCK")
     return render_template('index.html')
 
 @app.route('/register', methods=["POST"])
@@ -149,7 +148,7 @@ def delete(id):
     mysql.query_db(query,data)
     return redirect('/wall')
     # else:
-    #     flash("30 minutes has passed, bitch")
+    #     flash("30 minutes has passed")
     #     return redirect ('/wall')
        
 
