@@ -107,9 +107,13 @@ input[type="text"] {
 }
 .message_content {
     margin-top: 5px;
+    margin-bottom: 5px;
 }
 .delete_message {
     margin-top: 5px;
+    display: block;
+    vertical-align: top;
+    margin-left: 820px;
 }
 .delete_button {
     padding: 5px;
@@ -176,4 +180,15 @@ input[type="text"] {
     display: block;
     text-align: center;
     margin-top: 50px;
+}
+
+
+h3 {
+    display: inline-block;
+}
+
+h5 {
+    display: inline-block;
+    float: right;
+    color: #5a525a;
 }

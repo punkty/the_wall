@@ -29,7 +29,8 @@
         {% for message in messagedata %}
             <div class="post_group">
                 <div class="message">
-                    <h3>{{ message['first_name']}} {{ message['last_name'] }} {{ message['created_at'] }}</h3>
+                    <h3>{{ message['first_name']}} {{ message['last_name'] }}</h3>
+                    <h5>{{"{: %I:%M %p %b %d, %Y}".format(message['created_at']).replace(" 0", " ")}}</h5>
                     <p class="message_content">{{ message['message'] }}</p>
 
                     {% if message['users_id'] == session['user_id'] %}
@@ -39,7 +40,8 @@
                 {% for comment in commentdata %}
                     {% if comment['messages_id'] == message['id'] %}
                     <div class="comment">
-                        <h4>{{ comment['first_name'] }} {{ comment['last_name'] }} {{ comment['created_at'] }}</h4>
+                        <h3>{{ comment['first_name'] }} {{ comment['last_name'] }}</h3>
+                        <h5>{{"{: %I:%M %p %b %d, %Y}".format(comment['created_at']).replace(" 0", " ")}}</h5>
                         <p class="comment_content">{{ comment['comment'] }}</p>
                     </div><!--  /.comment -->
                     {% endif %}          
