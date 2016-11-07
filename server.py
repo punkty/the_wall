@@ -137,7 +137,9 @@ def comment(message_id):
 
 @app.route('/delete/<id>')
 def delete(id):
-
+    if "user_id" not in session and request.endpoint != "/": #ask Jack about this
+        return redirect('/')
+        
     query = "SELECT created_at FROM messages WHERE id = :id"
 
     data = {'id':id}    
