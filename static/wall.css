@@ -73,6 +73,10 @@ input[type="text"] {
 }
 .message_field {
     display: block;
+    height: 20px;
+    margin: 0px 14px 0px 0px; 
+    width: 955px; 
+    height: 48px;
 }
 .message_submit {
     padding: 5px;
@@ -108,7 +112,10 @@ input[type="text"] {
 .message_content {
     margin-top: 5px;
     margin-bottom: 5px;
+    word-wrap: break-word;
 }
+
+
 .delete_message {
     margin-top: 5px;
     display: block;
@@ -144,6 +151,7 @@ input[type="text"] {
     margin-top: 10px;
     padding: 12px;
     border-bottom: 1px solid #a49ca4;
+    word-wrap: break-word;
 }
 .comment_content {
     margin-top: 5px;
@@ -192,3 +200,5 @@ h5 {
     float: right;
     color: #5a525a;
 }
+
+margin: 0px 14px 0px 0px; width: 955px; height: 48px;
