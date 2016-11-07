@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>WHAT'S IN$IDE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='wall.css') }}">
 </head>
+
 <body>
-    <h1>The Wall</h1>
-    <h2>Hello, {{ user_first["first_name"] }}</h2>
-    <a href="/logoff"><button>Log Off</button></a>
-    <h3>Post Message</h3>
-    <form action="/message" method="POST">
-        <input type="text" name="new_message">
-        <input type="submit" value="Post a Message">    
-    </form>
+    <header>
+        <div id="header_container">
+            <h1>The Wall</h1>
+            <h2>Hello, {{ user_first["first_name"] }}</h2>
+            <a href="/logoff"><button>Log Off</button></a>
+        </div><!-- /#header_container  -->
+    </header>
+    <div id="wrapper">
+        <div class="post_message">
+            <h3>Post Message</h3>
+            <form action="/message" method="POST">
+                <input type="text" name="new_message">
+                <input type="submit" value="Post a Message">
+            </form>
+        </div><!--  /.post_message -->
         {% for message in messagedata %}
-            <h3>{{ message['first_name']}} {{ message['last_name'] }} {{ message['created_at'] }}</h3>
-            <p>{{ message['message'] }}</p>
-            {% if message['users_id'] == session['user_id'] %}
-            <a href="/delete/{{message['id']}}"><button>Delete Message</button></a>
-            {% endif %}
-            {% for comment in commentdata %}
-                {% if comment['messages_id'] == message['id'] %}
-                    <h4>{{ comment['first_name'] }} {{ comment['last_name'] }} {{ comment['created_at'] }}</h4>
-                    <p>{{ comment['comment'] }}</p>
-                {% endif %}
+            <div class="post_group">
+                <div class="message">
+                    <h3>{{ message['first_name']}} {{ message['last_name'] }} {{ message['created_at'] }}</h3>
+                    <p class="message_content">{{ message['message'] }}</p>
+
+                    {% if message['users_id'] == session['user_id'] %}
+                        <a href="/delete/{{message['id']}}" class="delete_message"><button>Delete Message</button></a>
+                    {% endif %}
+                </div><!--  /.message -->
+                    {% for comment in commentdata %}
+                        {% if comment['messages_id'] == message['id'] %}
+                        <div class="comment">
+                            <h4>{{ comment['first_name'] }} {{ comment['last_name'] }} {{ comment['created_at'] }}</h4>
+                            <p class="comment_content">{{ comment['comment'] }}</p>
+                        </div><!--  /.comment -->
+                        {% endif %}          
+                    {% endfor %}
+
+                    <form action="/comment/{{ message['id'] }}" method="POST" class="post_comment">
+                        <input type="text" name="new_comment">
+                        <input type="submit" value="Post a Comment">
+                    </form>
+                
+            </div><!--  /.post_group -->
         {% endfor %}
-    <form action="/comment/{{ message['id'] }}" method="POST">
-        <input type="text" name="new_comment">
-        <input type="submit" value="Post a Comment">
-    </form>
-    {% endfor %}
+    </div><!-- /#wrapper  -->
 </body>
+
 </html>
